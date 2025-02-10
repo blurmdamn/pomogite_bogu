@@ -1,6 +1,8 @@
 import time
 import random
 import logging
+import json
+import csv
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -11,12 +13,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # Настроим логирование
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 class SteamParser:
-    def __init__(self):
+    def __init__(self, headless=True):
         chrome_options = Options()
-        #chrome_options.add_argument("--headless")  # Запуск без GUI
+            #chrome_options.add_argument("--headless")  # Запуск без GUI
         chrome_options.add_argument("--disable-dev-shm-usage")  # Исправление для Docker/Linux
         chrome_options.add_argument("--no-sandbox")
         
@@ -40,7 +42,7 @@ class SteamParser:
 
     def fetch_steam_data(self):
         try:
-            self.driver.get('https://store.steampowered.com/search/?filter=globaltopsellers')
+            self.driver.get("https://store.steampowered.com/search/?filter=globaltopsellers")
             self.driver.implicitly_wait(5)
             
             # Ждём появления первой игры
@@ -58,11 +60,11 @@ class SteamParser:
                     title = game.find_element(By.XPATH, './/div[2]/div[1]/span').text
                     try:
                         price = game.find_element(By.XPATH, './/div[2]/div[4]/div/div/div/div').text.strip()
-                        if price.lower() == 'free':
+                        if price.lower() == "free":
                             price = "N/D"
                     except NoSuchElementException:
                         price = "N/D"
-                    data.append({'title': title, 'price': price})
+                    data.append({"title": title, "price": price})
                 except Exception as ex:
                     logging.warning(f"Error while fetching data for game {index}: {ex}")
 
@@ -70,6 +72,21 @@ class SteamParser:
         except TimeoutException:
             logging.error("Page load timed out. No data retrieved.")
             return []
+
+    def save_to_json(self, data, filename="steam_games.json"):
+        """Сохранение данных в JSON."""
+        with open(filename, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+        logging.info(f"Data saved to {filename}")
+
+    def save_to_csv(self, data, filename="steam_games.csv"):
+        """Сохранение данных в CSV."""
+        with open(filename, "w", encoding="utf-8", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["Название", "Цена"])
+            for game in data:
+                writer.writerow([game["title"], game["price"]])
+        logging.info(f"Data saved to {filename}")
 
     def close(self):
         self.driver.quit()
@@ -80,10 +97,11 @@ if __name__ == "__main__":
     parser = SteamParser()
     try:
         data = parser.fetch_steam_data()
-        logging.info("Fetched data:")
-        for item in data:
-            logging.info(item)
+        if data:
+            parser.save_to_json(data)  # Сохранение в JSON
+            parser.save_to_csv(data)   # Сохранение в CSV
     except Exception as ex:
         logging.error(f"Unexpected error: {ex}")
     finally:
         parser.close()
+

@@ -1,12 +1,12 @@
 import concurrent.futures
 from steam_parser import SteamParser
-from epic_parser import EpicParser
-from plati_parser import PlatiParser
+from gog_parser import GOGParser
+from nintendo_parser import NintendoParser
 
 def fetch_prices(urls: dict):
     """
     Функция для получения цен с разных платформ параллельно.
-    :param urls: Словарь с ключами "steam", "epic", "plati" и соответствующими URL.
+    :param urls: Словарь с ключами "steam", "gog", "nintendo" и соответствующими URL.
     :return: Словарь с полученными ценами.
     """
     results = {}
@@ -14,8 +14,8 @@ def fetch_prices(urls: dict):
     with concurrent.futures.ThreadPoolExecutor() as executor:
         parsers = {
             "steam": SteamParser(),
-            "epic": EpicParser(),
-            "plati": PlatiParser()
+            "gog": GOGParser(),
+            "nintendo": NintendoParser()
         }
         
         futures = {platform: executor.submit(parser.get_price, urls[platform]) 
