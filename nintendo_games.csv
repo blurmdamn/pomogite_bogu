@@ -1,171 +1,298 @@
-Название,Цена
-Hello Kitty Island Adventure,Н/Д
-Super Mario Party™ Jamboree,"Regular Price:
-$59.99"
-Poppy Playtime: Chapter 1,"Regular Price:
-$4.99"
-Overcooked! 2,"Regular Price:
-$24.99"
-Minecraft,"Regular Price:
-$29.99"
-New Super Mario Bros.™ U Deluxe,"Regular Price:
-$59.99"
-Stardew Valley,"Regular Price:
-$14.99"
-EA SPORTS FC™ 25,"Regular Price:
-$59.99"
-Poppy Playtime: Chapter 3,"Regular Price:
-$14.99"
-Poppy Playtime: Chapter 2,"Regular Price:
-$9.99"
-Among Us,"Regular Price:
-$5.00"
-Spiritfarer,Н/Д
-Mario Kart™ 8 Deluxe,"Regular Price:
-$59.99"
-Need for Speed™ Hot Pursuit Remastered,"Regular Price:
-$39.99"
-Unravel Two,"Regular Price:
-$19.99"
-Donkey Kong Country™ Returns HD,Н/Д
-Hogwarts Legacy,"Regular Price:
-$59.99"
-Plants vs. Zombies: Battle for Neighborville™ Complete Edition,"Regular Price:
-$39.99"
-Nintendo Switch™ Sports,"Regular Price:
-$39.99"
-Mortal Shell: Complete Edition,"Regular Price:
-$29.99"
-Super Smash Bros.™ Ultimate,"Regular Price:
-$59.99"
-Balatro,"Regular Price:
-$14.99"
-A Little to the Left,"Regular Price:
-$14.99"
-NBA 2K25,Н/Д
-Ultimate Chicken Horse,"Regular Price:
-$14.99"
-Duke Nukem 3D: 20th Anniversary World Tour,Н/Д
-Stray,Н/Д
-Animal Crossing™: New Horizons,"Regular Price:
-$59.99"
-Supermarket Owner Simulator: Business,"Regular Price:
-$6.99"
-Kaze and the Wild Masks,"Regular Price:
-$19.99"
-Red Dead Redemption,"Regular Price:
-$49.99"
-LEGO® Harry Potter™ Collection,"Regular Price:
-$29.99"
-Super Mario Bros.™ Wonder,"Regular Price:
-$59.99"
-Golf Story,Н/Д
-Sonic Mania,"Regular Price:
-$19.99"
-"Little Kitty, Big City","Regular Price:
-$24.99"
-Pokémon™ Legends: Arceus,"Regular Price:
-$59.99"
-LEGO® Marvel™ Super Heroes,"Regular Price:
-$39.99"
-BioShock: The Collection,Н/Д
-HELLO KITTY AND FRIENDS HAPPINESS PARADE,Н/Д
-Undertale,"Regular Price:
-$14.99"
-Rayman® Legends Definitive Edition,Н/Д
-Gang Beasts,"Regular Price:
-$29.99"
-Hollow Knight,"Regular Price:
-$15.00"
-PAC-MAN WORLD Re-PAC,"Regular Price:
-$29.99"
-MySims™: Cozy Bundle,"Regular Price:
-$39.99"
-Airplane Flight Simulator,Н/Д
-Kirby’s Dream Buffet™,"Regular Price:
-$14.99"
-XIII,Н/Д
-No Man's Sky,Н/Д
-Dead Cells,Н/Д
-Biped,"Regular Price:
-$14.99"
-UNO®,"Regular Price:
-$9.99"
-Wolfenstein II®: The New Colossus™,"Regular Price:
-$39.99"
-Mario Golf™: Super Rush,"Regular Price:
-$59.99"
-Don't Starve Together,"Regular Price:
-$14.99"
-The Last Campfire,Н/Д
-SEGA AGES Sonic The Hedgehog,"Regular Price:
-$7.99"
-LEGO® Jurassic World,"Regular Price:
-$39.99"
-Overcooked Special Edition,Н/Д
-South Park™: The Stick of Truth™,"Regular Price:
-$29.99"
-Untitled Goose Game,"Regular Price:
-$19.99"
-Diablo III: Eternal Collection,"Regular Price:
-$59.99"
-Hellblade: Senua's Sacrifice,"Regular Price:
-$29.99"
-THE GAME OF LIFE 2,"Regular Price:
-$29.99"
-Mario & Sonic at the Olympic Games Tokyo 2020,Н/Д
-Big Helmet Heroes,Н/Д
-Pokémon™ Violet,"Regular Price:
-$59.99"
-SONIC X SHADOW GENERATIONS,"Regular Price:
-$49.99"
-LEGO® Star Wars™: The Skywalker Saga,"Regular Price:
-$59.99"
-Assassin’s Creed®: The Rebel Collection,"Regular Price:
-$39.99"
-The Legend of Zelda™: Tears of the Kingdom,"Regular Price:
-$69.99"
-Sea of Stars,Н/Д
-Rafa's World,Н/Д
-resident evil 4,Н/Д
-Bread & Fred,"Regular Price:
-$14.99"
-Wavetale,Н/Д
-Persona 5 Royal,"Regular Price:
-$59.99"
-Dinosaur RPG - Dino Survival Simulator Survivor,"Regular Price:
-$9.99"
-Mario Strikers™: Battle League,Н/Д
-Burnout™ Paradise Remastered,"Regular Price:
-$29.99"
-Super Mario Odyssey™,"Regular Price:
-$59.99"
-MARIO + RABBIDS SPARKS OF HOPE,Н/Д
-House Flipper,"Regular Price:
-$24.99"
-The Legend of Zelda™: Breath of the Wild,"Regular Price:
-$59.99"
-Arcade Archives VS. SUPER MARIO BROS.,"Regular Price:
-$7.99"
-The Jackbox Party Pack 3,"Regular Price:
-$24.99"
-Tomb Raider IV-VI Remastered,Н/Д
-Disney Dreamlight Valley,Н/Д
-Truck Simulator City Delivery,Н/Д
-Cuphead,"Regular Price:
-$19.99"
-PICO PARK,"Regular Price:
-$4.99"
-The Legend of Zelda™: Echoes of Wisdom,"Regular Price:
-$59.99"
-Phoenix Wright: Ace Attorney Trilogy,Н/Д
-DOOM,"Regular Price:
-$19.99"
-Pokémon™ Scarlet,"Regular Price:
-$59.99"
-FINAL FANTASY VII,"Regular Price:
-$15.99"
-Hunter Simulator : Wild Hunting,"Regular Price:
-$9.99"
-Diablo® II: Resurrected™,"Regular Price:
-$39.99"
+Название,Цена,Ссылка
+Super Mario Party™ Jamboree,59.99,https://www.nintendo.com/us/store/products/super-mario-party-jamboree-switch/
+Minecraft,29.99,https://www.nintendo.com/us/store/products/minecraft-switch/
+Hello Kitty Island Adventure,39.99,https://www.nintendo.com/us/store/products/hello-kitty-island-adventure-switch/
+Stardew Valley,14.99,https://www.nintendo.com/us/store/products/stardew-valley-switch/
+Cars 3: Driven to Win,0.0,https://www.nintendo.com/us/store/products/cars-3-driven-to-win-switch/
+LEGO® NINJAGO® Movie Video Game,0.0,https://www.nintendo.com/us/store/products/lego-ninjago-movie-video-game-switch/
+Mario Kart™ 8 Deluxe,59.99,https://www.nintendo.com/us/store/products/mario-kart-8-deluxe-switch/
+Hades,24.99,https://www.nintendo.com/us/store/products/hades-switch/
+Star of Providence,0.0,https://www.nintendo.com/us/store/products/star-of-providence-switch/
+Mortal Kombat 11,0.0,https://www.nintendo.com/us/store/products/mortal-kombat-11-switch/
+Overcooked! All You Can Eat,0.0,https://www.nintendo.com/us/store/products/overcooked-all-you-can-eat-switch/
+Among Us,0.0,https://www.nintendo.com/us/store/products/among-us-switch/
+Hole io,0.0,https://www.nintendo.com/us/store/products/hole-io-switch/
+Nintendo Switch™ Sports,39.99,https://www.nintendo.com/us/store/products/nintendo-switch-sports-switch/
+Poppy Playtime: Chapter 1,4.99,https://www.nintendo.com/us/store/products/poppy-playtime-chapter-1-switch/
+Disney Dreamlight Valley,0.0,https://www.nintendo.com/us/store/products/disney-dreamlight-valley-switch/
+Super Smash Bros.™ Ultimate,59.99,https://www.nintendo.com/us/store/products/super-smash-bros-ultimate-switch/
+INSIDE,19.99,https://www.nintendo.com/us/store/products/inside-switch/
+LEGO® Worlds,0.0,https://www.nintendo.com/us/store/products/lego-worlds-switch/
+Donkey Kong Country™ Returns HD,0.0,https://www.nintendo.com/us/store/products/donkey-kong-country-returns-hd-switch/
+NBA 2K25,0.0,https://www.nintendo.com/us/store/products/nba-2k25-switch/
+Fitness Boxing Fist of the North Star,0.0,https://www.nintendo.com/us/store/products/fitness-boxing-fist-of-the-north-star-switch/
+Skyline Bowling,4.99,https://www.nintendo.com/us/store/products/skyline-bowling-switch/
+THE GAME OF LIFE 2,0.0,https://www.nintendo.com/us/store/products/the-game-of-life-2-switch/
+Super Mario Bros.™ Wonder,59.99,https://www.nintendo.com/us/store/products/super-mario-bros-wonder-switch/
+Cult of the Lamb,24.99,https://www.nintendo.com/us/store/products/cult-of-the-lamb-switch/
+Animal Crossing™: New Horizons,59.99,https://www.nintendo.com/us/store/products/animal-crossing-new-horizons-switch/
+Moving Out,0.0,https://www.nintendo.com/us/store/products/moving-out-switch/
+Poppy Playtime: Chapter 2,9.99,https://www.nintendo.com/us/store/products/poppy-playtime-chapter-2-switch/
+Pokémon™ Legends: Arceus,59.99,https://www.nintendo.com/us/store/products/pokemon-legends-arceus-switch/
+LEGO® The Incredibles,0.0,https://www.nintendo.com/us/store/products/lego-the-incredibles-switch/
+Kao the Kangaroo,0.0,https://www.nintendo.com/us/store/products/kao-the-kangaroo-switch/
+PICO PARK,4.99,https://www.nintendo.com/us/store/products/pico-park-switch/
+Paper io 2,0.0,https://www.nintendo.com/us/store/products/paper-io-2-switch/
+Paper Trail,0.0,https://www.nintendo.com/us/store/products/paper-trail-switch/
+My Universe - PET CLINIC CATS & DOGS,24.99,https://www.nintendo.com/us/store/products/my-universe-pet-clinic-cats-and-dogs-switch/
+LEGO® Marvel Super Heroes 2,0.0,https://www.nintendo.com/us/store/products/lego-marvel-super-heroes-2-switch/
+Hollow Knight,15.0,https://www.nintendo.com/us/store/products/hollow-knight-switch/
+Bee Simulator,0.0,https://www.nintendo.com/us/store/products/bee-simulator-switch/
+PICO PARK 2,8.99,https://www.nintendo.com/us/store/products/pico-park-2-switch/
+LIMBO,9.99,https://www.nintendo.com/us/store/products/limbo-switch/
+Yu-Gi-Oh! EARLY DAYS COLLECTION,0.0,https://www.nintendo.com/us/store/products/yu-gi-oh-early-days-collection-switch/
+Poppy Playtime: Chapter 3,14.99,https://www.nintendo.com/us/store/products/poppy-playtime-chapter-3-switch/
+The Oregon Trail,0.0,https://www.nintendo.com/us/store/products/the-oregon-trail-switch/
+EA SPORTS FC™ 25,0.0,https://www.nintendo.com/us/store/products/ea-sports-fc-25-switch/
+Human: Fall Flat,0.0,https://www.nintendo.com/us/store/products/human-fall-flat-switch/
+Jurassic World Evolution: Complete Edition,0.0,https://www.nintendo.com/us/store/products/jurassic-world-evolution-complete-edition-switch/
+Alan Wake Remastered,29.99,https://www.nintendo.com/us/store/products/alan-wake-remastered-switch/
+Arise: A Simple Story - Definitive Edition,0.0,https://www.nintendo.com/us/store/products/arise-a-simple-story-definitive-edition-switch/
+Balatro,14.99,https://www.nintendo.com/us/store/products/balatro-switch/
+.cat Milk,0.0,https://www.nintendo.com/us/store/products/cat-milk-switch/
+Urban Trial Playground,0.0,https://www.nintendo.com/us/store/products/urban-trial-playground-switch/
+House Mansion Flipper,7.99,https://www.nintendo.com/us/store/products/house-mansion-flipper-switch/
+LEGO® DC Super-Villains,0.0,https://www.nintendo.com/us/store/products/lego-dc-super-villains-switch/
+Pokémon™ Violet,59.99,https://www.nintendo.com/us/store/products/pokemon-violet-switch/
+BioShock: The Collection,0.0,https://www.nintendo.com/us/store/products/bioshock-the-collection-switch/
+The Legend of Zelda™: Tears of the Kingdom,69.99,https://www.nintendo.com/us/store/products/the-legend-of-zelda-tears-of-the-kingdom-switch/
+New Super Mario Bros.™ U Deluxe,59.99,https://www.nintendo.com/us/store/products/new-super-mario-bros-u-deluxe-switch/
+MySims™: Cozy Bundle,0.0,https://www.nintendo.com/us/store/products/mysims-cozy-bundle-switch/
+The Legend of Zelda™: Echoes of Wisdom,59.99,https://www.nintendo.com/us/store/products/the-legend-of-zelda-echoes-of-wisdom-switch/
+Clue,0.0,https://www.nintendo.com/us/store/products/clue-switch/
+Unravel Two,0.0,https://www.nintendo.com/us/store/products/unravel-two-switch/
+Metamorphosis,0.0,https://www.nintendo.com/us/store/products/metamorphosis-switch/
+Pokémon™ Scarlet,59.99,https://www.nintendo.com/us/store/products/pokemon-scarlet-switch/
+Immortals Fenyx Rising™,0.0,https://www.nintendo.com/us/store/products/immortals-fenyx-rising-switch/
+Super Mario Odyssey™,59.99,https://www.nintendo.com/us/store/products/super-mario-odyssey-switch/
+Sword of the Vagrant,0.0,https://www.nintendo.com/us/store/products/sword-of-the-vagrant-switch/
+Red Dead Redemption,49.99,https://www.nintendo.com/us/store/products/red-dead-redemption-switch/
+Death's Door,19.99,https://www.nintendo.com/us/store/products/deaths-door-switch/
+Cabernet,0.0,https://www.nintendo.com/us/store/products/cabernet-switch/
+Hungry Shark® World,9.99,https://www.nintendo.com/us/store/products/hungry-shark-world-switch/
+GRIS,16.99,https://www.nintendo.com/us/store/products/gris-switch/
+Sid Meier's Civilization® VII,59.99,https://www.nintendo.com/us/store/products/sid-meiers-civilization-vii-switch/
+Arcade Archives VS. SUPER MARIO BROS.,7.99,https://www.nintendo.com/us/store/products/arcade-archives-vs-super-mario-bros-switch/
+Tools Up!,0.0,https://www.nintendo.com/us/store/products/tools-up-switch/
+ESCAPE - BACKROOMS HORROR,4.99,https://www.nintendo.com/us/store/products/escape-backrooms-horror-switch/
+Super Mario™ 3D World + Bowser’s Fury,59.99,https://www.nintendo.com/us/store/products/super-mario-3d-world-plus-bowsers-fury-switch/
+The Legend of Zelda™: Breath of the Wild,59.99,https://www.nintendo.com/us/store/products/the-legend-of-zelda-breath-of-the-wild-switch/
+Stray,29.99,https://www.nintendo.com/us/store/products/stray-switch/
+Nickelodeon All-Star Brawl,0.0,https://www.nintendo.com/us/store/products/nickelodeon-all-star-brawl-switch/
+Bridge Race,0.0,https://www.nintendo.com/us/store/products/bridge-race-switch/
+Cuphead,19.99,https://www.nintendo.com/us/store/products/cuphead-switch/
+Terraria,29.99,https://www.nintendo.com/us/store/products/terraria-switch/
+Mario Party™ Superstars,59.99,https://www.nintendo.com/us/store/products/mario-party-superstars-switch/
+Serious Sam Collection,29.99,https://www.nintendo.com/us/store/products/serious-sam-collection-switch/
+Turnip Boy Commits Tax Evasion,0.0,https://www.nintendo.com/us/store/products/turnip-boy-commits-tax-evasion-switch/
+Undertale,14.99,https://www.nintendo.com/us/store/products/undertale-switch/
+Overcooked! 2,24.99,https://www.nintendo.com/us/store/products/overcooked-2-switch/
+Duke Nukem 3D: 20th Anniversary World Tour,0.0,https://www.nintendo.com/us/store/products/duke-nukem-3d-20th-anniversary-world-tour-switch/
+7 Days to End with You,11.99,https://www.nintendo.com/us/store/products/7-days-to-end-with-you-switch/
+Dying Light: Definitive Edition,49.99,https://www.nintendo.com/us/store/products/dying-light-definitive-edition-switch/
+Pokémon™ Brilliant Diamond,59.99,https://www.nintendo.com/us/store/products/pokemon-brilliant-diamond-switch/
+Torchlight II,0.0,https://www.nintendo.com/us/store/products/torchlight-ii-switch/
+Inscryption,19.99,https://www.nintendo.com/us/store/products/inscryption-switch/
+THE HOUSE OF THE DEAD: Remake,0.0,https://www.nintendo.com/us/store/products/the-house-of-the-dead-remake-switch/
+Elderand,0.0,https://www.nintendo.com/us/store/products/elderand-switch/
+My Cozy Room,8.99,https://www.nintendo.com/us/store/products/my-cozy-room-switch/
+Echoes of the Plum Grove,19.99,https://www.nintendo.com/us/store/products/echoes-of-the-plum-grove-switch/
+SpongeBob: Krusty Cook-Off,14.99,https://www.nintendo.com/us/store/products/spongebob-krusty-cook-off-switch/
+Super Mario Party™ Jamboree,59.99,https://www.nintendo.com/us/store/products/super-mario-party-jamboree-switch/
+Minecraft,29.99,https://www.nintendo.com/us/store/products/minecraft-switch/
+Hello Kitty Island Adventure,39.99,https://www.nintendo.com/us/store/products/hello-kitty-island-adventure-switch/
+Stardew Valley,14.99,https://www.nintendo.com/us/store/products/stardew-valley-switch/
+Cars 3: Driven to Win,0.0,https://www.nintendo.com/us/store/products/cars-3-driven-to-win-switch/
+LEGO® NINJAGO® Movie Video Game,0.0,https://www.nintendo.com/us/store/products/lego-ninjago-movie-video-game-switch/
+Mario Kart™ 8 Deluxe,59.99,https://www.nintendo.com/us/store/products/mario-kart-8-deluxe-switch/
+Hades,24.99,https://www.nintendo.com/us/store/products/hades-switch/
+Star of Providence,0.0,https://www.nintendo.com/us/store/products/star-of-providence-switch/
+Mortal Kombat 11,0.0,https://www.nintendo.com/us/store/products/mortal-kombat-11-switch/
+Overcooked! All You Can Eat,0.0,https://www.nintendo.com/us/store/products/overcooked-all-you-can-eat-switch/
+Among Us,0.0,https://www.nintendo.com/us/store/products/among-us-switch/
+Hole io,0.0,https://www.nintendo.com/us/store/products/hole-io-switch/
+Nintendo Switch™ Sports,39.99,https://www.nintendo.com/us/store/products/nintendo-switch-sports-switch/
+Poppy Playtime: Chapter 1,4.99,https://www.nintendo.com/us/store/products/poppy-playtime-chapter-1-switch/
+Disney Dreamlight Valley,0.0,https://www.nintendo.com/us/store/products/disney-dreamlight-valley-switch/
+Super Smash Bros.™ Ultimate,59.99,https://www.nintendo.com/us/store/products/super-smash-bros-ultimate-switch/
+INSIDE,19.99,https://www.nintendo.com/us/store/products/inside-switch/
+LEGO® Worlds,0.0,https://www.nintendo.com/us/store/products/lego-worlds-switch/
+Donkey Kong Country™ Returns HD,0.0,https://www.nintendo.com/us/store/products/donkey-kong-country-returns-hd-switch/
+NBA 2K25,0.0,https://www.nintendo.com/us/store/products/nba-2k25-switch/
+Fitness Boxing Fist of the North Star,0.0,https://www.nintendo.com/us/store/products/fitness-boxing-fist-of-the-north-star-switch/
+Skyline Bowling,4.99,https://www.nintendo.com/us/store/products/skyline-bowling-switch/
+THE GAME OF LIFE 2,0.0,https://www.nintendo.com/us/store/products/the-game-of-life-2-switch/
+Super Mario Bros.™ Wonder,59.99,https://www.nintendo.com/us/store/products/super-mario-bros-wonder-switch/
+Cult of the Lamb,24.99,https://www.nintendo.com/us/store/products/cult-of-the-lamb-switch/
+Animal Crossing™: New Horizons,59.99,https://www.nintendo.com/us/store/products/animal-crossing-new-horizons-switch/
+Moving Out,0.0,https://www.nintendo.com/us/store/products/moving-out-switch/
+Poppy Playtime: Chapter 2,9.99,https://www.nintendo.com/us/store/products/poppy-playtime-chapter-2-switch/
+Pokémon™ Legends: Arceus,59.99,https://www.nintendo.com/us/store/products/pokemon-legends-arceus-switch/
+LEGO® The Incredibles,0.0,https://www.nintendo.com/us/store/products/lego-the-incredibles-switch/
+Kao the Kangaroo,0.0,https://www.nintendo.com/us/store/products/kao-the-kangaroo-switch/
+PICO PARK,4.99,https://www.nintendo.com/us/store/products/pico-park-switch/
+Paper io 2,0.0,https://www.nintendo.com/us/store/products/paper-io-2-switch/
+Paper Trail,0.0,https://www.nintendo.com/us/store/products/paper-trail-switch/
+My Universe - PET CLINIC CATS & DOGS,24.99,https://www.nintendo.com/us/store/products/my-universe-pet-clinic-cats-and-dogs-switch/
+LEGO® Marvel Super Heroes 2,0.0,https://www.nintendo.com/us/store/products/lego-marvel-super-heroes-2-switch/
+Hollow Knight,15.0,https://www.nintendo.com/us/store/products/hollow-knight-switch/
+Bee Simulator,0.0,https://www.nintendo.com/us/store/products/bee-simulator-switch/
+PICO PARK 2,8.99,https://www.nintendo.com/us/store/products/pico-park-2-switch/
+LIMBO,9.99,https://www.nintendo.com/us/store/products/limbo-switch/
+Yu-Gi-Oh! EARLY DAYS COLLECTION,0.0,https://www.nintendo.com/us/store/products/yu-gi-oh-early-days-collection-switch/
+Poppy Playtime: Chapter 3,14.99,https://www.nintendo.com/us/store/products/poppy-playtime-chapter-3-switch/
+The Oregon Trail,0.0,https://www.nintendo.com/us/store/products/the-oregon-trail-switch/
+EA SPORTS FC™ 25,0.0,https://www.nintendo.com/us/store/products/ea-sports-fc-25-switch/
+Human: Fall Flat,0.0,https://www.nintendo.com/us/store/products/human-fall-flat-switch/
+Jurassic World Evolution: Complete Edition,0.0,https://www.nintendo.com/us/store/products/jurassic-world-evolution-complete-edition-switch/
+Alan Wake Remastered,29.99,https://www.nintendo.com/us/store/products/alan-wake-remastered-switch/
+Arise: A Simple Story - Definitive Edition,0.0,https://www.nintendo.com/us/store/products/arise-a-simple-story-definitive-edition-switch/
+Balatro,14.99,https://www.nintendo.com/us/store/products/balatro-switch/
+.cat Milk,0.0,https://www.nintendo.com/us/store/products/cat-milk-switch/
+Urban Trial Playground,0.0,https://www.nintendo.com/us/store/products/urban-trial-playground-switch/
+House Mansion Flipper,7.99,https://www.nintendo.com/us/store/products/house-mansion-flipper-switch/
+LEGO® DC Super-Villains,0.0,https://www.nintendo.com/us/store/products/lego-dc-super-villains-switch/
+Pokémon™ Violet,59.99,https://www.nintendo.com/us/store/products/pokemon-violet-switch/
+BioShock: The Collection,0.0,https://www.nintendo.com/us/store/products/bioshock-the-collection-switch/
+The Legend of Zelda™: Tears of the Kingdom,69.99,https://www.nintendo.com/us/store/products/the-legend-of-zelda-tears-of-the-kingdom-switch/
+New Super Mario Bros.™ U Deluxe,59.99,https://www.nintendo.com/us/store/products/new-super-mario-bros-u-deluxe-switch/
+MySims™: Cozy Bundle,0.0,https://www.nintendo.com/us/store/products/mysims-cozy-bundle-switch/
+The Legend of Zelda™: Echoes of Wisdom,59.99,https://www.nintendo.com/us/store/products/the-legend-of-zelda-echoes-of-wisdom-switch/
+Clue,0.0,https://www.nintendo.com/us/store/products/clue-switch/
+Unravel Two,0.0,https://www.nintendo.com/us/store/products/unravel-two-switch/
+Metamorphosis,0.0,https://www.nintendo.com/us/store/products/metamorphosis-switch/
+Pokémon™ Scarlet,59.99,https://www.nintendo.com/us/store/products/pokemon-scarlet-switch/
+Immortals Fenyx Rising™,0.0,https://www.nintendo.com/us/store/products/immortals-fenyx-rising-switch/
+Super Mario Odyssey™,59.99,https://www.nintendo.com/us/store/products/super-mario-odyssey-switch/
+Sword of the Vagrant,0.0,https://www.nintendo.com/us/store/products/sword-of-the-vagrant-switch/
+Red Dead Redemption,49.99,https://www.nintendo.com/us/store/products/red-dead-redemption-switch/
+Death's Door,19.99,https://www.nintendo.com/us/store/products/deaths-door-switch/
+Cabernet,0.0,https://www.nintendo.com/us/store/products/cabernet-switch/
+Hungry Shark® World,9.99,https://www.nintendo.com/us/store/products/hungry-shark-world-switch/
+GRIS,16.99,https://www.nintendo.com/us/store/products/gris-switch/
+Sid Meier's Civilization® VII,59.99,https://www.nintendo.com/us/store/products/sid-meiers-civilization-vii-switch/
+Arcade Archives VS. SUPER MARIO BROS.,7.99,https://www.nintendo.com/us/store/products/arcade-archives-vs-super-mario-bros-switch/
+Tools Up!,0.0,https://www.nintendo.com/us/store/products/tools-up-switch/
+ESCAPE - BACKROOMS HORROR,4.99,https://www.nintendo.com/us/store/products/escape-backrooms-horror-switch/
+Super Mario™ 3D World + Bowser’s Fury,59.99,https://www.nintendo.com/us/store/products/super-mario-3d-world-plus-bowsers-fury-switch/
+The Legend of Zelda™: Breath of the Wild,59.99,https://www.nintendo.com/us/store/products/the-legend-of-zelda-breath-of-the-wild-switch/
+Stray,29.99,https://www.nintendo.com/us/store/products/stray-switch/
+Nickelodeon All-Star Brawl,0.0,https://www.nintendo.com/us/store/products/nickelodeon-all-star-brawl-switch/
+Bridge Race,0.0,https://www.nintendo.com/us/store/products/bridge-race-switch/
+Cuphead,19.99,https://www.nintendo.com/us/store/products/cuphead-switch/
+Terraria,29.99,https://www.nintendo.com/us/store/products/terraria-switch/
+Mario Party™ Superstars,59.99,https://www.nintendo.com/us/store/products/mario-party-superstars-switch/
+Serious Sam Collection,29.99,https://www.nintendo.com/us/store/products/serious-sam-collection-switch/
+Turnip Boy Commits Tax Evasion,0.0,https://www.nintendo.com/us/store/products/turnip-boy-commits-tax-evasion-switch/
+Undertale,14.99,https://www.nintendo.com/us/store/products/undertale-switch/
+Overcooked! 2,24.99,https://www.nintendo.com/us/store/products/overcooked-2-switch/
+Duke Nukem 3D: 20th Anniversary World Tour,0.0,https://www.nintendo.com/us/store/products/duke-nukem-3d-20th-anniversary-world-tour-switch/
+7 Days to End with You,11.99,https://www.nintendo.com/us/store/products/7-days-to-end-with-you-switch/
+Dying Light: Definitive Edition,49.99,https://www.nintendo.com/us/store/products/dying-light-definitive-edition-switch/
+Pokémon™ Brilliant Diamond,59.99,https://www.nintendo.com/us/store/products/pokemon-brilliant-diamond-switch/
+Torchlight II,0.0,https://www.nintendo.com/us/store/products/torchlight-ii-switch/
+Inscryption,19.99,https://www.nintendo.com/us/store/products/inscryption-switch/
+THE HOUSE OF THE DEAD: Remake,0.0,https://www.nintendo.com/us/store/products/the-house-of-the-dead-remake-switch/
+Elderand,0.0,https://www.nintendo.com/us/store/products/elderand-switch/
+My Cozy Room,8.99,https://www.nintendo.com/us/store/products/my-cozy-room-switch/
+Echoes of the Plum Grove,19.99,https://www.nintendo.com/us/store/products/echoes-of-the-plum-grove-switch/
+SpongeBob: Krusty Cook-Off,14.99,https://www.nintendo.com/us/store/products/spongebob-krusty-cook-off-switch/
+Super Mario Party™ Jamboree,59.99,https://www.nintendo.com/us/store/products/super-mario-party-jamboree-switch/
+Minecraft,29.99,https://www.nintendo.com/us/store/products/minecraft-switch/
+Hello Kitty Island Adventure,39.99,https://www.nintendo.com/us/store/products/hello-kitty-island-adventure-switch/
+Stardew Valley,14.99,https://www.nintendo.com/us/store/products/stardew-valley-switch/
+Cars 3: Driven to Win,0.0,https://www.nintendo.com/us/store/products/cars-3-driven-to-win-switch/
+LEGO® NINJAGO® Movie Video Game,0.0,https://www.nintendo.com/us/store/products/lego-ninjago-movie-video-game-switch/
+Mario Kart™ 8 Deluxe,59.99,https://www.nintendo.com/us/store/products/mario-kart-8-deluxe-switch/
+Hades,24.99,https://www.nintendo.com/us/store/products/hades-switch/
+Star of Providence,0.0,https://www.nintendo.com/us/store/products/star-of-providence-switch/
+Mortal Kombat 11,0.0,https://www.nintendo.com/us/store/products/mortal-kombat-11-switch/
+Overcooked! All You Can Eat,0.0,https://www.nintendo.com/us/store/products/overcooked-all-you-can-eat-switch/
+Among Us,0.0,https://www.nintendo.com/us/store/products/among-us-switch/
+Hole io,0.0,https://www.nintendo.com/us/store/products/hole-io-switch/
+Nintendo Switch™ Sports,39.99,https://www.nintendo.com/us/store/products/nintendo-switch-sports-switch/
+Poppy Playtime: Chapter 1,4.99,https://www.nintendo.com/us/store/products/poppy-playtime-chapter-1-switch/
+Disney Dreamlight Valley,0.0,https://www.nintendo.com/us/store/products/disney-dreamlight-valley-switch/
+Super Smash Bros.™ Ultimate,59.99,https://www.nintendo.com/us/store/products/super-smash-bros-ultimate-switch/
+INSIDE,19.99,https://www.nintendo.com/us/store/products/inside-switch/
+LEGO® Worlds,0.0,https://www.nintendo.com/us/store/products/lego-worlds-switch/
+Donkey Kong Country™ Returns HD,0.0,https://www.nintendo.com/us/store/products/donkey-kong-country-returns-hd-switch/
+NBA 2K25,0.0,https://www.nintendo.com/us/store/products/nba-2k25-switch/
+Fitness Boxing Fist of the North Star,0.0,https://www.nintendo.com/us/store/products/fitness-boxing-fist-of-the-north-star-switch/
+Skyline Bowling,4.99,https://www.nintendo.com/us/store/products/skyline-bowling-switch/
+THE GAME OF LIFE 2,0.0,https://www.nintendo.com/us/store/products/the-game-of-life-2-switch/
+Super Mario Bros.™ Wonder,59.99,https://www.nintendo.com/us/store/products/super-mario-bros-wonder-switch/
+Cult of the Lamb,24.99,https://www.nintendo.com/us/store/products/cult-of-the-lamb-switch/
+Animal Crossing™: New Horizons,59.99,https://www.nintendo.com/us/store/products/animal-crossing-new-horizons-switch/
+Moving Out,0.0,https://www.nintendo.com/us/store/products/moving-out-switch/
+Poppy Playtime: Chapter 2,9.99,https://www.nintendo.com/us/store/products/poppy-playtime-chapter-2-switch/
+Pokémon™ Legends: Arceus,59.99,https://www.nintendo.com/us/store/products/pokemon-legends-arceus-switch/
+LEGO® The Incredibles,0.0,https://www.nintendo.com/us/store/products/lego-the-incredibles-switch/
+Kao the Kangaroo,0.0,https://www.nintendo.com/us/store/products/kao-the-kangaroo-switch/
+PICO PARK,4.99,https://www.nintendo.com/us/store/products/pico-park-switch/
+Paper io 2,0.0,https://www.nintendo.com/us/store/products/paper-io-2-switch/
+Paper Trail,0.0,https://www.nintendo.com/us/store/products/paper-trail-switch/
+My Universe - PET CLINIC CATS & DOGS,24.99,https://www.nintendo.com/us/store/products/my-universe-pet-clinic-cats-and-dogs-switch/
+LEGO® Marvel Super Heroes 2,0.0,https://www.nintendo.com/us/store/products/lego-marvel-super-heroes-2-switch/
+Hollow Knight,15.0,https://www.nintendo.com/us/store/products/hollow-knight-switch/
+Bee Simulator,0.0,https://www.nintendo.com/us/store/products/bee-simulator-switch/
+PICO PARK 2,8.99,https://www.nintendo.com/us/store/products/pico-park-2-switch/
+LIMBO,9.99,https://www.nintendo.com/us/store/products/limbo-switch/
+Yu-Gi-Oh! EARLY DAYS COLLECTION,0.0,https://www.nintendo.com/us/store/products/yu-gi-oh-early-days-collection-switch/
+Poppy Playtime: Chapter 3,14.99,https://www.nintendo.com/us/store/products/poppy-playtime-chapter-3-switch/
+The Oregon Trail,0.0,https://www.nintendo.com/us/store/products/the-oregon-trail-switch/
+EA SPORTS FC™ 25,0.0,https://www.nintendo.com/us/store/products/ea-sports-fc-25-switch/
+Human: Fall Flat,0.0,https://www.nintendo.com/us/store/products/human-fall-flat-switch/
+Jurassic World Evolution: Complete Edition,0.0,https://www.nintendo.com/us/store/products/jurassic-world-evolution-complete-edition-switch/
+Alan Wake Remastered,29.99,https://www.nintendo.com/us/store/products/alan-wake-remastered-switch/
+Arise: A Simple Story - Definitive Edition,0.0,https://www.nintendo.com/us/store/products/arise-a-simple-story-definitive-edition-switch/
+Balatro,14.99,https://www.nintendo.com/us/store/products/balatro-switch/
+.cat Milk,0.0,https://www.nintendo.com/us/store/products/cat-milk-switch/
+Urban Trial Playground,0.0,https://www.nintendo.com/us/store/products/urban-trial-playground-switch/
+House Mansion Flipper,7.99,https://www.nintendo.com/us/store/products/house-mansion-flipper-switch/
+LEGO® DC Super-Villains,0.0,https://www.nintendo.com/us/store/products/lego-dc-super-villains-switch/
+Pokémon™ Violet,59.99,https://www.nintendo.com/us/store/products/pokemon-violet-switch/
+BioShock: The Collection,0.0,https://www.nintendo.com/us/store/products/bioshock-the-collection-switch/
+The Legend of Zelda™: Tears of the Kingdom,69.99,https://www.nintendo.com/us/store/products/the-legend-of-zelda-tears-of-the-kingdom-switch/
+New Super Mario Bros.™ U Deluxe,59.99,https://www.nintendo.com/us/store/products/new-super-mario-bros-u-deluxe-switch/
+MySims™: Cozy Bundle,0.0,https://www.nintendo.com/us/store/products/mysims-cozy-bundle-switch/
+The Legend of Zelda™: Echoes of Wisdom,59.99,https://www.nintendo.com/us/store/products/the-legend-of-zelda-echoes-of-wisdom-switch/
+Clue,0.0,https://www.nintendo.com/us/store/products/clue-switch/
+Unravel Two,0.0,https://www.nintendo.com/us/store/products/unravel-two-switch/
+Metamorphosis,0.0,https://www.nintendo.com/us/store/products/metamorphosis-switch/
+Pokémon™ Scarlet,59.99,https://www.nintendo.com/us/store/products/pokemon-scarlet-switch/
+Immortals Fenyx Rising™,0.0,https://www.nintendo.com/us/store/products/immortals-fenyx-rising-switch/
+Super Mario Odyssey™,59.99,https://www.nintendo.com/us/store/products/super-mario-odyssey-switch/
+Sword of the Vagrant,0.0,https://www.nintendo.com/us/store/products/sword-of-the-vagrant-switch/
+Red Dead Redemption,49.99,https://www.nintendo.com/us/store/products/red-dead-redemption-switch/
+Death's Door,19.99,https://www.nintendo.com/us/store/products/deaths-door-switch/
+Cabernet,0.0,https://www.nintendo.com/us/store/products/cabernet-switch/
+Hungry Shark® World,9.99,https://www.nintendo.com/us/store/products/hungry-shark-world-switch/
+GRIS,16.99,https://www.nintendo.com/us/store/products/gris-switch/
+Sid Meier's Civilization® VII,59.99,https://www.nintendo.com/us/store/products/sid-meiers-civilization-vii-switch/
+Arcade Archives VS. SUPER MARIO BROS.,7.99,https://www.nintendo.com/us/store/products/arcade-archives-vs-super-mario-bros-switch/
+Tools Up!,0.0,https://www.nintendo.com/us/store/products/tools-up-switch/
+ESCAPE - BACKROOMS HORROR,4.99,https://www.nintendo.com/us/store/products/escape-backrooms-horror-switch/
+Super Mario™ 3D World + Bowser’s Fury,59.99,https://www.nintendo.com/us/store/products/super-mario-3d-world-plus-bowsers-fury-switch/
+The Legend of Zelda™: Breath of the Wild,59.99,https://www.nintendo.com/us/store/products/the-legend-of-zelda-breath-of-the-wild-switch/
+Stray,29.99,https://www.nintendo.com/us/store/products/stray-switch/
+Nickelodeon All-Star Brawl,0.0,https://www.nintendo.com/us/store/products/nickelodeon-all-star-brawl-switch/
+Bridge Race,0.0,https://www.nintendo.com/us/store/products/bridge-race-switch/
+Cuphead,19.99,https://www.nintendo.com/us/store/products/cuphead-switch/
+Terraria,29.99,https://www.nintendo.com/us/store/products/terraria-switch/
+Mario Party™ Superstars,59.99,https://www.nintendo.com/us/store/products/mario-party-superstars-switch/
+Serious Sam Collection,29.99,https://www.nintendo.com/us/store/products/serious-sam-collection-switch/
+Turnip Boy Commits Tax Evasion,0.0,https://www.nintendo.com/us/store/products/turnip-boy-commits-tax-evasion-switch/
+Undertale,14.99,https://www.nintendo.com/us/store/products/undertale-switch/
+Overcooked! 2,24.99,https://www.nintendo.com/us/store/products/overcooked-2-switch/
+Duke Nukem 3D: 20th Anniversary World Tour,0.0,https://www.nintendo.com/us/store/products/duke-nukem-3d-20th-anniversary-world-tour-switch/
+7 Days to End with You,11.99,https://www.nintendo.com/us/store/products/7-days-to-end-with-you-switch/
+Dying Light: Definitive Edition,49.99,https://www.nintendo.com/us/store/products/dying-light-definitive-edition-switch/
+Pokémon™ Brilliant Diamond,59.99,https://www.nintendo.com/us/store/products/pokemon-brilliant-diamond-switch/
+Torchlight II,0.0,https://www.nintendo.com/us/store/products/torchlight-ii-switch/
+Inscryption,19.99,https://www.nintendo.com/us/store/products/inscryption-switch/
+THE HOUSE OF THE DEAD: Remake,0.0,https://www.nintendo.com/us/store/products/the-house-of-the-dead-remake-switch/
+Elderand,0.0,https://www.nintendo.com/us/store/products/elderand-switch/
+My Cozy Room,8.99,https://www.nintendo.com/us/store/products/my-cozy-room-switch/
+Echoes of the Plum Grove,19.99,https://www.nintendo.com/us/store/products/echoes-of-the-plum-grove-switch/
+SpongeBob: Krusty Cook-Off,14.99,https://www.nintendo.com/us/store/products/spongebob-krusty-cook-off-switch/

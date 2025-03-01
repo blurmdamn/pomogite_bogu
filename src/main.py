@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from src.api.route_user import api_router as user_router
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
@@ -10,12 +11,10 @@ engine = create_async_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
 Base = declarative_base()
 
-app = FastAPI()
+app = FastAPI(title="My App", version="1.0")
 
-
-# Пример модели запроса (если потребуется передавать какие-либо параметры в будущем)
-class SteamParseRequest(BaseModel):
-    param: str
+# Подключаем маршруты для работы с пользователями (JWT, регистрация, логин и т.д.)
+app.include_router(user_router)
 
 
 @app.get("/")
