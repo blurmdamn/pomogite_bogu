@@ -7,7 +7,7 @@ from src.database import get_async_session
 from src.schemas.user import UserCreate, ShowUser
 from src.orm import user as user_orm
 from src.service.auth import create_access_token, get_current_user
-from src.models.user import User  # для аннотаций
+from src.models.users import User  # для аннотаций
 
 api_router = APIRouter(prefix="/api/users", tags=["users"])
 

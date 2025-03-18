@@ -9,7 +9,7 @@ from starlette import status
 
 from src.config import jwt_token_settings
 from src.database import get_async_session
-from src.models.user import User
+from src.models.users import User
 from src.orm.user import get_user_by_username
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/token/")

@@ -1,6 +1,6 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.models.store import Store
+from src.models.stores import Store
 
 
 async def get_store_by_name(store_name: str, async_db: AsyncSession):

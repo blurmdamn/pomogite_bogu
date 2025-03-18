@@ -1,6 +1,6 @@
 from sqlalchemy import insert, select
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.models.notification import Notification
+from src.models.notifications import Notification
 
 
 async def create_notification(notification_data: dict, async_db: AsyncSession):

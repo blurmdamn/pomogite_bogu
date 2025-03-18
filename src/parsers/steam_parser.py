@@ -18,8 +18,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.future import select
 
 from src.config import prod_db_settings
-from src.models.product import Product
-from src.models.store import Store
+from src.models.products import Product
+from src.models.stores import Store
 
 # ✅ Настроим логирование
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")

@@ -1,6 +1,6 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.models.user import User
+from src.models.users import User
 from src.service.hashing import Hasher
 
 async def get_user_by_username(username: str, async_db: AsyncSession):

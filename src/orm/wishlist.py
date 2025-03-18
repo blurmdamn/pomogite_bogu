@@ -1,6 +1,6 @@
 from sqlalchemy import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.models.wishlist import Wishlist
+from src.models.wishlists import Wishlist
 
 
 async def create_wishlist(user_id: int, async_db: AsyncSession):

@@ -7,11 +7,11 @@ from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from src.models.base_class import Base
-from src.models.user import User  # Добавь все модели
-from src.models.wishlist import Wishlist
-from src.models.notification import Notification
-from src.models.product import Product
-from src.models.store import Store
+from src.models.users import User  # Добавь все модели
+from src.models.wishlists import Wishlist
+from src.models.notifications import Notification
+from src.models.products import Product
+from src.models.stores import Store
 
 config = context.config
 

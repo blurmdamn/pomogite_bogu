@@ -4,10 +4,11 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.models.base_class import Base
 
 if TYPE_CHECKING:
-    from .product import Product
-
+    from .products import Product
 
 class Store(Base):
+    __tablename__ = "stores"  # Название таблицы во множественном числе
+
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String, unique=True, nullable=False)
     url: Mapped[str] = mapped_column(String, nullable=False)

@@ -1,6 +1,6 @@
 from sqlalchemy import select, delete, update
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.models.product import Product
+from src.models.products import Product
 
 
 async def add_product_to_wishlist(product_data: dict, async_db: AsyncSession):
