@@ -12,6 +12,7 @@ from src.models.wishlists import Wishlist
 from src.models.notifications import Notification
 from src.models.products import Product
 from src.models.stores import Store
+from src.models.currency import Currency
 
 config = context.config
 
