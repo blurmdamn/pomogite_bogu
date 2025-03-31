@@ -7,11 +7,11 @@ from .wishlists_products import wishlist_product
 if TYPE_CHECKING:
     from .stores import Store
     from .wishlists import Wishlist
-    from .currency import Currency  # Для аннотаций
+    from .currency import Currency
 
 class Product(Base):
     __tablename__ = "products"
-    __table_args__ = {"extend_existing": True}  # Чтобы избежать ошибок, если таблица уже определена
+    __table_args__ = {"extend_existing": True}
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String, nullable=False)
@@ -19,7 +19,7 @@ class Product(Base):
     url: Mapped[str] = mapped_column(String, nullable=False)
     store_id: Mapped[int] = mapped_column(ForeignKey("stores.id"), nullable=False)
 
-    # Новое поле: внешний ключ на таблицу валют
+    # Новое поле для связи с валютой:
     currency_id: Mapped[int] = mapped_column(ForeignKey("currency.id"), nullable=False, index=True)
     currency: Mapped["Currency"] = relationship("Currency", back_populates="products", lazy="joined")
 

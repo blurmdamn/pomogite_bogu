@@ -1,3 +1,4 @@
+from psycopg2 import IntegrityError
 from sqlalchemy import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.models.wishlists import Wishlist
@@ -9,7 +10,14 @@ async def create_wishlist(user_id: int, async_db: AsyncSession):
     """
     wishlist = Wishlist(user_id=user_id)
     async_db.add(wishlist)
-    await async_db.commit()
+
+    try:
+        await async_db.commit()
+        await async_db.refresh(wishlist)
+    except IntegrityError:
+        await async_db.rollback()
+        raise ValueError("Ошибка при создании списка желаемого.")
+
     return wishlist
 
 

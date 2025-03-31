@@ -9,7 +9,7 @@ async def get_store_by_name(store_name: str, async_db: AsyncSession):
     """
     query = select(Store).where(Store.name == store_name)
     result = await async_db.execute(query)
-    return result.scalar()
+    return result.scalar_one_or_none()
 
 
 async def list_all_stores(async_db: AsyncSession):

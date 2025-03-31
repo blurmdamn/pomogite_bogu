@@ -20,11 +20,12 @@ from sqlalchemy.future import select
 from src.config import prod_db_settings
 from src.models.products import Product
 from src.models.stores import Store
+from src.models.currency import Currency
 
-# ✅ Настроим логирование
+# Настройка логирования
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-# ✅ Настроим подключение к БД через SQLAlchemy
+# Настройка подключения к БД через SQLAlchemy
 DATABASE_URL = prod_db_settings.DATABASE_URL
 engine = create_async_engine(DATABASE_URL, echo=False)
 SessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
@@ -36,10 +37,10 @@ class SteamParser:
     def __init__(self, headless=True):
         """Инициализация Selenium WebDriver."""
         chrome_options = Options()
-        if headless:
-            chrome_options.add_argument("--headless")  # ✅ Запуск без GUI
-        chrome_options.add_argument("--disable-dev-shm-usage")  # Исправление для Docker/Linux
-        chrome_options.add_argument("--no-sandbox")
+        # if headless:
+        #     chrome_options.add_argument("--headless")  # Запуск без GUI
+        # chrome_options.add_argument("--disable-dev-shm-usage")  # Исправление для Docker/Linux
+        # chrome_options.add_argument("--no-sandbox")
 
         self.driver = webdriver.Chrome(
             service=Service(ChromeDriverManager().install()),
@@ -55,14 +56,14 @@ class SteamParser:
             time.sleep(random.uniform(2, 4))  # Динамическая задержка
             new_height = self.driver.execute_script("return document.body.scrollHeight")
             if new_height == last_height:
-                break  # Выходим, если больше нет изменений
+                break  # Выходим, если изменений нет
             last_height = new_height
         logging.info("✅ Scrolling completed.")
 
     @staticmethod
     def clean_price(price_text):
         """
-        Форматирует цену: 
+        Форматирует цену:
          - Убирает все символы, кроме цифр, запятых и точек,
          - Удаляет пробелы внутри числа,
          - Заменяет запятую на точку,
@@ -136,10 +137,22 @@ async def get_or_create_steam_store(session: AsyncSession):
     return store
 
 
+async def get_currency_id(currency_name: str, session: AsyncSession) -> int:
+    """
+    Получает ID валюты по её имени.
+    """
+    result = await session.execute(select(Currency).where(Currency.name == currency_name))
+    currency = result.scalar_one_or_none()
+    if not currency:
+        raise Exception(f"Currency '{currency_name}' not found in DB. Please seed the table first.")
+    return currency.id
+
+
 async def save_games_to_db(games):
     """Сохранение списка игр в PostgreSQL через SQLAlchemy."""
     async with SessionLocal() as session:
         steam_store = await get_or_create_steam_store(session)
+        kzt_id = await get_currency_id("KZT", session)  # Для Steam используется валюта KZT
         new_games_count = 0
         updated_games_count = 0
 
@@ -155,16 +168,16 @@ async def save_games_to_db(games):
             if existing_game:
                 # Если игра уже есть, обновляем цену и валюту
                 existing_game.price = game["price"]
-                existing_game.currency = "KZT"  # ✅ Для Steam явно указываем валюту
+                existing_game.currency_id = kzt_id
                 updated_games_count += 1
             else:
                 # Если игры нет, создаем новую запись
                 game_entry = Product(
                     name=game["title"],
                     price=game["price"],
-                    currency="KZT",  # ✅ Для Steam явно указываем валюту
                     url=game["url"],
-                    store_id=steam_store.id  # Связываем игру с магазином
+                    store_id=steam_store.id,
+                    currency_id=kzt_id
                 )
                 session.add(game_entry)
                 new_games_count += 1
