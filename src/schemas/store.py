@@ -7,7 +7,8 @@ class StoreCreate(BaseModel):
     Схема создания нового магазина.
     """
     name: str = Field(..., min_length=1)
-    url: str = Field(..., regex=r'^https?://[^\s/$.?#].[^\s]*$')
+    url: str = Field(..., pattern=r'^https?://[^\s/$.?#].[^\s]*$')  # ✅ правильный синтаксис
+
 
 
 class ShowStore(BaseModel):

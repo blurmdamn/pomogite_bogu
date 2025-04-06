@@ -2,6 +2,8 @@ from datetime import datetime
 from pydantic import BaseModel, Field
 from typing_extensions import Optional
 
+from src.schemas.store import ShowStore
+
 
 class ProductCreate(BaseModel):
     """
@@ -32,3 +34,25 @@ class UpdateProduct(BaseModel):
     """
     name: Optional[str] = None
     price: Optional[float] = None
+
+class ProductSearchResult(BaseModel):
+    id: int
+    name: str
+    price: float
+    url: str
+    created_at: datetime
+
+    class ConfigDict:
+        from_attributes = True
+
+
+class ShowProductWithStore(BaseModel):
+    id: int
+    name: str
+    price: float
+    url: str
+    created_at: datetime
+    store: Optional[ShowStore]  # 👈 сюда кладётся магазин
+
+    class ConfigDict:
+        from_attributes = True

@@ -60,3 +60,17 @@ async def delete_product(product_id: int, async_db: AsyncSession):
     result = await async_db.execute(query.execution_options(synchronize_session="fetch"))
     await async_db.commit()
     return result.rowcount > 0
+
+
+from sqlalchemy import select
+from sqlalchemy.orm import joinedload
+from src.models.products import Product
+
+async def search_products(query: str, async_db: AsyncSession):    #поиск продукта
+    result = await async_db.execute(
+        select(Product)
+        .where(Product.name.ilike(f"%{query}%"))
+        .options(joinedload(Product.store))
+        .limit(20)
+    )
+    return result.scalars().all()

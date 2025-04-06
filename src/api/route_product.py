@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 
 from src.database import get_async_session
-from src.schemas.product import ProductCreate, ShowProduct
+from src.schemas.product import ProductCreate, ProductSearchResult, ShowProduct, ShowProductWithStore
 from src.orm import product as product_orm
 from src.service.auth import get_current_user
 
@@ -27,13 +27,14 @@ async def create_product(
 
 
 @api_router.get(
-    "/list/",
-    response_model=List[ShowProduct],
+    "/search",
+    response_model=List[ShowProductWithStore],  # 👈 тут заменили ShowProduct
     status_code=status.HTTP_200_OK,
-    description="Получение списка продуктов",
 )
-async def list_products(db: AsyncSession = Depends(get_async_session)):
-    return await product_orm.list_products(async_db=db)
+async def search_products_route(
+    q: str, db: AsyncSession = Depends(get_async_session)
+):
+    return await product_orm.search_products(query=q, async_db=db)
 
 
 @api_router.get(
@@ -44,3 +45,17 @@ async def list_products(db: AsyncSession = Depends(get_async_session)):
 )
 async def get_product(product_id: int, db: AsyncSession = Depends(get_async_session)):
     return await product_orm.retrieve_product(product_id=product_id, async_db=db)
+
+from fastapi import Query
+
+@api_router.get(
+    "/search/",
+    response_model=List[ProductSearchResult],
+    status_code=status.HTTP_200_OK,
+    description="Поиск игр по названию"
+)
+async def search_products(
+    q: str = Query(..., min_length=1),
+    db: AsyncSession = Depends(get_async_session)
+):
+    return await product_orm.search_products(query=q, async_db=db)
