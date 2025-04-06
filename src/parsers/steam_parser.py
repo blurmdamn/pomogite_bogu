@@ -16,11 +16,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.future import select
+from sqlalchemy.sql.expression import and_
 
 from src.config import prod_db_settings
 from src.models.products import Product
 from src.models.stores import Store
-from src.models.currency import Currency
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -37,11 +37,10 @@ class SteamParser:
     def __init__(self, headless=True):
         """Инициализация Selenium WebDriver."""
         chrome_options = Options()
-        # if headless:
-        #     chrome_options.add_argument("--headless")  # Запуск без GUI
-        # chrome_options.add_argument("--disable-dev-shm-usage")  # Исправление для Docker/Linux
-        # chrome_options.add_argument("--no-sandbox")
-
+        if headless:
+            chrome_options.add_argument("--headless")  # ✅ Запуск без GUI
+        chrome_options.add_argument("--disable-dev-shm-usage")  # Исправление для Docker/Linux
+        chrome_options.add_argument("--no-sandbox")
         self.driver = webdriver.Chrome(
             service=Service(ChromeDriverManager().install()),
             options=chrome_options
@@ -73,8 +72,7 @@ class SteamParser:
             return 0.0
         try:
             cleaned_price = re.sub(r"[^\d,\.]", "", price_text)
-            cleaned_price = cleaned_price.replace(" ", "")
-            cleaned_price = cleaned_price.replace(",", ".")
+            cleaned_price = cleaned_price.replace(" ", "").replace(",", ".")
             return float(cleaned_price)
         except ValueError:
             logging.warning(f"⚠️ Error converting price: '{price_text}'")
@@ -82,37 +80,41 @@ class SteamParser:
 
     def fetch_steam_data(self):
         """Парсинг данных с сайта Steam."""
-        try:
-            self.driver.get(self.BASE_URL)
-            self.driver.implicitly_wait(10)
+        logging.info("🚀 Opening Steam store page...")
+        self.driver.get(self.BASE_URL)
+        self.driver.implicitly_wait(10)
 
-            # Ждем появления первой игры
-            wait = WebDriverWait(self.driver, 15)
-            wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="search_resultsRows"]/a[1]')))
+        wait = WebDriverWait(self.driver, 15)
+        wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="search_resultsRows"]/a[1]')))
 
-            self.scroll_down()
+        self.scroll_down()
 
-            data = []
-            game_elements = self.driver.find_elements(By.XPATH, '//*[@id="search_resultsRows"]/a')
-            logging.info(f"🎮 Found {len(game_elements)} games.")
+        data = []
+        game_elements = self.driver.find_elements(By.XPATH, '//*[@id="search_resultsRows"]/a')
+        logging.info(f"🎮 Found {len(game_elements)} games.")
 
-            for index, game in enumerate(game_elements, start=1):
-                try:
-                    title = game.find_element(By.XPATH, './/div[2]/div[1]/span').text
-                    url = game.get_attribute("href")
-                    try:
-                        price_text = game.find_element(By.XPATH, './/div[2]/div[4]/div/div/div/div').text.strip()
-                    except NoSuchElementException:
-                        price_text = ""
-                    price = self.clean_price(price_text)
-                    data.append({"title": title, "price": price, "url": url})
-                except Exception as ex:
-                    logging.warning(f"⚠️ Error while fetching data for game {index}: {ex}")
+        for index, game in enumerate(game_elements, start=1):
+            time.sleep(3)
+            try:
+                title = game.find_element(By.XPATH, './/div[2]/div[1]/span').text
+            except NoSuchElementException:
+                logging.warning(f"⚠️ No title found for game at index {index}. Skipping.")
+                continue  # Если нет названия, пропускаем игру
 
-            return data
-        except TimeoutException:
-            logging.error("❌ Page load timed out. No data retrieved.")
-            return []
+            url = game.get_attribute("href")
+            try:
+                price_text = game.find_element(By.XPATH, './/div[2]/div[4]/div/div/div/div').text.strip()
+            except NoSuchElementException:
+                logging.warning(f"⚠️ No price found for '{title}', skipping this game.")
+                continue  # Если цена отсутствует, пропускаем игру
+            # Если блок цены отсутствует, пропускаем игру
+            price = self.clean_price(price_text) if price_text else None
+            if price is None:
+                continue  # Пропускаем игры без цены
+
+            data.append({"title": title, "price": price, "url": url})
+        logging.info("Parsed data: %s", data)
+        return data
 
     def close(self):
         """Закрытие браузера."""
@@ -137,69 +139,53 @@ async def get_or_create_steam_store(session: AsyncSession):
     return store
 
 
-async def get_currency_id(currency_name: str, session: AsyncSession) -> int:
-    """
-    Получает ID валюты по её имени.
-    """
-    result = await session.execute(select(Currency).where(Currency.name == currency_name))
-    currency = result.scalar_one_or_none()
-    if not currency:
-        raise Exception(f"Currency '{currency_name}' not found in DB. Please seed the table first.")
-    return currency.id
-
-
-async def save_games_to_db(games):
+async def save_to_db(data: list):
     """Сохранение списка игр в PostgreSQL через SQLAlchemy."""
     async with SessionLocal() as session:
-        steam_store = await get_or_create_steam_store(session)
-        kzt_id = await get_currency_id("KZT", session)  # Для Steam используется валюта KZT
-        new_games_count = 0
-        updated_games_count = 0
+        store = await get_or_create_steam_store(session)
+        new_count = 0
+        updated_count = 0
+        logging.info("Processing data: ", data)
 
-        for game in games:
-            existing_game = await session.execute(
+        for item in data:
+            price = float(item["price"])  # Предполагается, что clean_price уже всё обработал
+
+            res = await session.execute(
                 select(Product).where(
-                    Product.name == game["title"],
-                    Product.store_id == steam_store.id
+                    and_(
+                        Product.name == item["title"],
+                        Product.store_id == store.id
+                    )
                 )
             )
-            existing_game = existing_game.scalars().first()
-
-            if existing_game:
-                # Если игра уже есть, обновляем цену и валюту
-                existing_game.price = game["price"]
-                existing_game.currency_id = kzt_id
-                updated_games_count += 1
+            product = res.scalars().first()
+            if product:
+                product.price = price
+                updated_count += 1
             else:
-                # Если игры нет, создаем новую запись
-                game_entry = Product(
-                    name=game["title"],
-                    price=game["price"],
-                    url=game["url"],
-                    store_id=steam_store.id,
-                    currency_id=kzt_id
+                new_product = Product(
+                    name=item["title"],
+                    price=price,
+                    url=item["url"],
+                    store_id=store.id
                 )
-                session.add(game_entry)
-                new_games_count += 1
+                session.add(new_product)
+                new_count += 1
 
+        logging.info("Ready to commit. New: %d, Updated: %d", new_count, updated_count)
         await session.commit()
-        logging.info(f"✅ {new_games_count} new games added to DB.")
-        logging.info(f"✅ {updated_games_count} existing games updated in DB.")
+        logging.info("Database commit successful.")
 
 
 async def main():
     """Основной метод для запуска парсера и сохранения данных."""
     logging.info("🚀 Starting parser...")
     parser = SteamParser(headless=True)
-    try:
-        data = parser.fetch_steam_data()
-        if data:
-            await save_games_to_db(data)
-    except Exception as ex:
-        logging.error(f"❌ Unexpected error: {ex}")
-    finally:
-        parser.close()
+    data = parser.fetch_steam_data()
+    print("✅ Parsed data:", data)
+    if data:
+        await save_to_db(data)
+    else:
+        logging.warning("No data parsed from Steam Store.")
+    parser.close()
 
-
-if __name__ == "__main__":
-    asyncio.run(main())

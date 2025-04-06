@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 from src.models.products import Product
 from src.models.wishlists_products import wishlist_product
 from src.orm.store import get_store_by_name
-from src.orm.currency import get_currency_by_name
+
 
 
 async def add_product_to_wishlist(product_data: dict, async_db: AsyncSession):
@@ -16,13 +16,7 @@ async def add_product_to_wishlist(product_data: dict, async_db: AsyncSession):
     if not store:
         raise ValueError(f"Магазин '{product_data['store_name']}' не найден")
 
-    # Проверяем, существует ли валюта
-    currency = await get_currency_by_name(product_data["currency_name"], async_db)
-    if not currency:
-        raise ValueError(f"Валюта '{product_data['currency_name']}' не найдена")
-
     product_data["store_id"] = store.id
-    product_data["currency_id"] = currency.id
     product_data.pop("store_name", None)
     product_data.pop("currency_name", None)
 
