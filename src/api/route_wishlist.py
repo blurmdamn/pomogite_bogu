@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 
 from src.database import get_async_session
-from src.schemas.wishlist import WishlistCreate, ShowWishlist
+from src.schemas.wishlist import WishlistAddProduct, WishlistCreate, ShowWishlist
 from src.orm import wishlist as wishlist_orm
 from src.service.auth import get_current_user
 
@@ -30,10 +30,13 @@ async def create_wishlist(
     "/list/",
     response_model=List[ShowWishlist],
     status_code=status.HTTP_200_OK,
-    description="Получение списка желаемого",
+    description="Получение списка желаемого текущего пользователя",
 )
-async def list_wishlists(db: AsyncSession = Depends(get_async_session)):
-    return await wishlist_orm.list_wishlists(async_db=db)
+async def list_user_wishlists(
+    db: AsyncSession = Depends(get_async_session),
+    current_user=Depends(get_current_user),
+):
+    return await wishlist_orm.list_wishlists_by_user(user_id=current_user.id, async_db=db)
 
 
 @api_router.get(
@@ -44,3 +47,20 @@ async def list_wishlists(db: AsyncSession = Depends(get_async_session)):
 )
 async def get_wishlist(wishlist_id: int, db: AsyncSession = Depends(get_async_session)):
     return await wishlist_orm.retrieve_wishlist(wishlist_id=wishlist_id, async_db=db)
+
+
+@api_router.post(
+    "/add",
+    status_code=status.HTTP_200_OK,
+    description="Добавить продукт в вишлист текущего пользователя"
+)
+async def add_product_to_wishlist(
+    payload: WishlistAddProduct,
+    db: AsyncSession = Depends(get_async_session),
+    current_user=Depends(get_current_user)
+):
+    return await wishlist_orm.add_product_to_user_wishlist(
+        user_id=current_user.id,
+        product_id=payload.product_id,
+        async_db=db
+    )

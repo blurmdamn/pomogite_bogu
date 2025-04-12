@@ -1,6 +1,9 @@
 from datetime import datetime
 from pydantic import BaseModel
 from typing_extensions import Optional
+from typing import List
+from src.schemas.product import ShowProduct  # обязательно должен существовать!
+from src.schemas.product import ShowProductWithStore
 
 
 class WishlistCreate(BaseModel):
@@ -11,13 +14,16 @@ class WishlistCreate(BaseModel):
 
 
 class ShowWishlist(BaseModel):
-    """
-    Схема отображения списка желаемого.
-    """
     id: int
-    name: Optional[str]
     user_id: int
     created_at: datetime
+    products: List[ShowProductWithStore] = []  # 👈 добавили список продуктов
 
     class ConfigDict:
         from_attributes = True
+
+class WishlistAddProduct(BaseModel):
+    """
+    Схема для добавления продукта в вишлист
+    """
+    product_id: int

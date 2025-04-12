@@ -21,7 +21,7 @@ class ShowProduct(BaseModel):
     id: int
     name: str
     price: float
-    wishlist_id: int
+    url: str
     created_at: datetime
 
     class ConfigDict:

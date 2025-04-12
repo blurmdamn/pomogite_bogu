@@ -30,6 +30,7 @@ async def create_product(
     "/search",
     response_model=List[ShowProductWithStore],  # 👈 тут заменили ShowProduct
     status_code=status.HTTP_200_OK,
+    description="Для отображения в поиске",
 )
 async def search_products_route(
     q: str, db: AsyncSession = Depends(get_async_session)

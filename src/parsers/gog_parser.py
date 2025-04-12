@@ -16,7 +16,6 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import and_, select
 
-
 from src.config import prod_db_settings
 from src.models.products import Product
 from src.models.stores import Store
@@ -34,12 +33,24 @@ SessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=F
 
 
 def clean_price(price_text: str) -> float:
-    """Форматирует цену."""
+    """Форматирует цену в число с плавающей точкой."""
     if not price_text or price_text.lower() in ["free", "бесплатно"]:
         return 0.0
+
+    # Удаляем все пробелы, включая неразрывные и юникодные
+    price_text = re.sub(r"\s+", "", price_text, flags=re.UNICODE)
+
+    # Оставляем только цифры, запятые и точки
     cleaned = re.sub(r"[^\d,\.]", "", price_text)
-    cleaned = cleaned.replace(" ", "").replace(",", ".")
-    return float(cleaned)
+
+    # Логика обработки запятой/точки
+    if "," in cleaned and "." not in cleaned:
+        cleaned = cleaned.replace(",", ".")
+    elif "," in cleaned and "." in cleaned:
+        cleaned = cleaned.replace(".", "").replace(",", ".")
+
+    # Если после очистки строка пустая или невалидна — возвращаем 0.0
+    return float(cleaned) if re.match(r"^\d+(\.\d+)?$", cleaned) else 0.0
 
 
 class GOGParser:
@@ -59,41 +70,45 @@ class GOGParser:
         self.wait = WebDriverWait(self.driver, 10)
         logging.info("Selenium WebDriver initialized.")
 
-    def fetch_data(self, pages: int = 209) -> list:
+    def fetch_data(self, pages: int = 208) -> list:
         results = []
+
         for page in range(1, pages + 1):
             url = self.BASE_URL.format(page)
-            logging.info("Fetching page %d: %s", page, url)
+            logging.info("📄 Fetching page %d: %s", page, url)
+
             self.driver.get(url)
             self.wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="Catalog"]')))
+
             for i in range(1, 49):
-                title_xpath = f'//*[@id="Catalog"]/div/div[2]/paginated-products-grid/div/product-tile[{i}]/a/div[2]/div[1]/product-title/span'
-                price_xpath = f'//*[@id="Catalog"]/div/div[2]/paginated-products-grid/div/product-tile[{i}]/a/div[2]/div[2]/div/product-price/price-value/span'
+                base_xpath = f'//*[@id="Catalog"]/div/div[2]/paginated-products-grid/div/product-tile[{i}]'
+                title_xpath = f'{base_xpath}/a/div[2]/div[1]/product-title/span'
+                price_xpath = f'{base_xpath}/a/div[2]/div[2]/div/product-price/price-value/span'
+                url_xpath = f'{base_xpath}/a'
+
                 title_elements = self.driver.find_elements(By.XPATH, title_xpath)
                 price_elements = self.driver.find_elements(By.XPATH, price_xpath)
-                if title_elements:
+                url_elements = self.driver.find_elements(By.XPATH, url_xpath)
+
+                if title_elements and url_elements:
                     title = title_elements[0].text.strip()
-                    price_text = price_elements[0].text.strip() if price_elements else ""
-                    price = clean_price(price_text)
-                    results.append({"title": title, "price": price, "url": url})
-                    logging.info("Parsed game: %s | Price: %s", title, price)
+                    # ✅ Исправление: берём textContent, а не .text
+                    price_raw = price_elements[0].get_attribute("textContent").strip() if price_elements else ""
+                    price = clean_price(price_raw)
+                    game_url = url_elements[0].get_attribute("href")
+
+                    results.append({
+                        "title": title,
+                        "price": price,
+                        "url": game_url,
+                    })
+
+                    logging.info("✅ Parsed game: %s | Price: %s", title, price)
                 else:
-                    logging.info("No title found for product %d on page %d", i, page)
-        logging.info("Parsed %d games.", len(results))
+                    logging.info("⛔️ No title or URL found for product %d on page %d", i, page)
+
+        logging.info("🎯 Total games parsed: %d", len(results))
         return results
-
-    def save_to_json(self, data: list, filename: str = "gog_games.json"):
-        with open(filename, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
-        logging.info("Data saved to JSON file: %s", filename)
-
-    def save_to_csv(self, data: list, filename: str = "gog_games.csv"):
-        with open(filename, "w", encoding="utf-8", newline="") as f:
-            writer = csv.writer(f)
-            writer.writerow(["Название", "Цена", "URL"])
-            for item in data:
-                writer.writerow([item["title"], item["price"], item["url"]])
-        logging.info("Data saved to CSV file: %s", filename)
 
     def close(self):
         self.driver.quit()
@@ -119,7 +134,6 @@ async def save_to_db(data: list):
         store = await get_or_create_store(session)
         new_count = 0
         updated_count = 0
-        logging.info("SSSSSSSSSSSSSS: ", data)
 
         for item in data:
             price = float(item["price"])  # Предполагается, что clean_price уже всё обработал
@@ -146,25 +160,19 @@ async def save_to_db(data: list):
                 session.add(new_product)
                 new_count += 1
 
-        logging.info("Ready to commit. New: %d, Updated: %d", new_count, updated_count)
+        logging.info("🆕 New: %d | 🔄 Updated: %d", new_count, updated_count)
         await session.commit()
-        logging.info("Database commit successful.")
+        logging.info("✅ Database commit successful.")
 
 
 async def main():
     parser = GOGParser(headless=True)
-    logging.info("testttt")
-    data = parser.fetch_data(pages=209)
-    print("test")
-    logging.info("FFFFFFFD:  ", data)
+    logging.info("🚀 Starting GOG parser...")
+    data = parser.fetch_data(pages=208)
+
     if data:
-        # parser.save_to_json(data)
-        # parser.save_to_csv(data)
         await save_to_db(data)
     else:
-        logging.warning("No data parsed from GOG.")
+        logging.warning("⚠️ No data parsed from GOG.")
+
     parser.close()
-
-
-# if __name__ == "__main__":
-#     asyncio.run(main())
