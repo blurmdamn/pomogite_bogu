@@ -20,7 +20,7 @@ class ShowNotification(BaseModel):
     message: str
     user_id: int
     product_id: int
-    created_at: datetime
+    sent_at: datetime
 
     class ConfigDict:
         from_attributes = True

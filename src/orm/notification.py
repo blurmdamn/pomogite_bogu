@@ -1,4 +1,4 @@
-import select
+from sqlalchemy.future import select  # ✅ это правильный SQLAlchemy-импорт
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import IntegrityError
 from src.models.notifications import Notification

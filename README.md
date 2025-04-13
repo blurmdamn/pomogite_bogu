@@ -10,3 +10,10 @@ git add .
 git commit -m "Commit"
 
  git push origin master
+
+
+celery -A src.celery.worker.celery_app worker --loglevel=info
+
+
+celery -A src.celery.worker call src.tasks.parsers.run_gog_parser #для задач
+

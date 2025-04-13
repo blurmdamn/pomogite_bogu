@@ -35,3 +35,11 @@ class JWTSettings(BaseModel):
     TOKEN_LIFESPAN: int = 3600  # Время жизни токена в секундах (1 час)
 
 jwt_token_settings = JWTSettings()
+
+
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+class CelerySettings(BaseSettings):
+    REDIS_URL: str = "redis://localhost:6379/0"
+
+    model_config = SettingsConfigDict(extra="allow")  # 👈 разрешить "лишние" переменные

@@ -30,7 +30,11 @@ async def create_notification(
     "/list/",
     response_model=List[ShowNotification],
     status_code=status.HTTP_200_OK,
-    description="Получение списка уведомлений",
+    description="Получение списка уведомлений текущего пользователя",
 )
-async def list_notifications(db: AsyncSession = Depends(get_async_session)):
-    return await notification_orm.list_notifications(async_db=db)
+async def list_notifications(
+    db: AsyncSession = Depends(get_async_session),
+    current_user=Depends(get_current_user)
+):
+    return await notification_orm.list_notifications_by_user(user_id=current_user.id, async_db=db)
+
