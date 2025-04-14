@@ -19,6 +19,7 @@ class ShowUser(BaseModel):
     username: str
     email: str
     is_active: bool
+    telegram_id: Optional[int] = None  # 👈 добавить
 
     class ConfigDict:
         from_attributes = True
@@ -31,3 +32,11 @@ class UpdateUser(BaseModel):
     username: Optional[str] = None
     email: Optional[str] = None
     password: Optional[str] = None
+
+
+class UpdateTelegramID(BaseModel):
+    """
+    Схема для обновления Telegram ID пользователя.
+    """
+    user_id: int
+    telegram_id: int

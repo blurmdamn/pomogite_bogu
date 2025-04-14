@@ -2,6 +2,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import Boolean, Integer, String, TIMESTAMP, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.models.base_class import Base
+from sqlalchemy import BigInteger,Column
 
 if TYPE_CHECKING:
     from .wishlists import Wishlist
@@ -16,6 +17,7 @@ class User(Base):
     hashed_password: Mapped[str] = mapped_column(String, nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[str] = mapped_column(TIMESTAMP(timezone=True), server_default=func.now())
+    telegram_id: Mapped[int | None] = mapped_column(BigInteger, nullable=True)
 
     wishlists: Mapped[list["Wishlist"]] = relationship("Wishlist", back_populates="user")
     notifications: Mapped[list["Notification"]] = relationship("Notification", back_populates="user")

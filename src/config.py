@@ -43,3 +43,5 @@ class CelerySettings(BaseSettings):
     REDIS_URL: str = "redis://localhost:6379/0"
 
     model_config = SettingsConfigDict(extra="allow")  # 👈 разрешить "лишние" переменные
+
+celery_settings = CelerySettings()

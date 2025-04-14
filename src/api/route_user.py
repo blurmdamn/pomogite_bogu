@@ -4,9 +4,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 
 from src.database import get_async_session
-from src.schemas.user import UserCreate, ShowUser
+from src.schemas.user import UserCreate, ShowUser, UpdateTelegramID
 from src.orm import user as user_orm
 from src.service.auth import create_access_token, get_current_user
+from src.service.user import update_telegram_id
 from src.models.users import User  # для аннотаций
 
 api_router = APIRouter(prefix="/api/users", tags=["users"])
@@ -63,3 +64,14 @@ async def get_user(user_id: int, db: AsyncSession = Depends(get_async_session)):
 )
 async def read_current_user(current_user: User = Depends(get_current_user)):
     return current_user
+
+@api_router.patch(
+    "/update-telegram/",
+    description="Обновить Telegram ID пользователя"
+)
+async def set_telegram_id(
+    data: UpdateTelegramID,
+    db: AsyncSession = Depends(get_async_session)
+):
+    await update_telegram_id(user_id=data.user_id, telegram_id=data.telegram_id, db=db)
+    return {"message": f"Telegram ID {data.telegram_id} установлен для пользователя {data.user_id}"}

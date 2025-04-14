@@ -1,13 +1,16 @@
 from celery import Celery
+from src.config import celery_settings  # импорт настроек из .env
 
 celery_app = Celery(
     "project",
-    broker="redis://127.0.0.1:6379/0",
-    backend="redis://127.0.0.1:6379/0"
+    broker=celery_settings.REDIS_URL,
+    backend=celery_settings.REDIS_URL,
 )
 
-celery_app.autodiscover_tasks(["src.tasks.parsers"])
-
+celery_app.autodiscover_tasks([
+    "src.tasks.parsers",
+    "src.tasks.compare",
+])
 
 celery_app.conf.timezone = "Asia/Almaty"
 celery_app.conf.enable_utc = False
