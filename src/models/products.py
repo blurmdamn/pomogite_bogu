@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING
-from sqlalchemy import ForeignKey, Integer, String, Float, TIMESTAMP, func
+from sqlalchemy import ForeignKey, Integer, String, Float, TIMESTAMP, func, Text, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.models.base_class import Base
 from .wishlists_products import wishlist_product
@@ -17,6 +17,10 @@ class Product(Base):
     price: Mapped[float] = mapped_column(nullable=False)
     url: Mapped[str] = mapped_column(String, nullable=False)
     store_id: Mapped[int] = mapped_column(ForeignKey("stores.id"), nullable=False)
+
+    # 🆕 Добавленные поля
+    description: Mapped[str | None] = mapped_column(Text, nullable=True)
+    is_enriched: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
 
     store: Mapped["Store"] = relationship("Store", back_populates="products", lazy="joined")
     wishlists: Mapped[list["Wishlist"]] = relationship("Wishlist", secondary=wishlist_product, back_populates="products")
