@@ -37,19 +37,14 @@ def clean_price(price_text: str) -> float:
     if not price_text or price_text.lower() in ["free", "бесплатно"]:
         return 0.0
 
-    # Удаляем все пробелы, включая неразрывные и юникодные
     price_text = re.sub(r"\s+", "", price_text, flags=re.UNICODE)
-
-    # Оставляем только цифры, запятые и точки
     cleaned = re.sub(r"[^\d,\.]", "", price_text)
 
-    # Логика обработки запятой/точки
     if "," in cleaned and "." not in cleaned:
         cleaned = cleaned.replace(",", ".")
     elif "," in cleaned and "." in cleaned:
         cleaned = cleaned.replace(".", "").replace(",", ".")
 
-    # Если после очистки строка пустая или невалидна — возвращаем 0.0
     return float(cleaned) if re.match(r"^\d+(\.\d+)?$", cleaned) else 0.0
 
 
@@ -80,22 +75,21 @@ class GOGParser:
             self.driver.get(url)
             self.wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="Catalog"]')))
 
+            a_elements = self.driver.find_elements(By.CSS_SELECTOR, 'a.product-tile')
+
             for i in range(1, 49):
                 base_xpath = f'//*[@id="Catalog"]/div/div[2]/paginated-products-grid/div/product-tile[{i}]'
                 title_xpath = f'{base_xpath}/a/div[2]/div[1]/product-title/span'
                 price_xpath = f'{base_xpath}/a/div[2]/div[2]/div/product-price/price-value/span'
-                url_xpath = f'{base_xpath}/a'
 
                 title_elements = self.driver.find_elements(By.XPATH, title_xpath)
                 price_elements = self.driver.find_elements(By.XPATH, price_xpath)
-                url_elements = self.driver.find_elements(By.XPATH, url_xpath)
 
-                if title_elements and url_elements:
+                if title_elements and i - 1 < len(a_elements):
                     title = title_elements[0].text.strip()
-                    # ✅ Исправление: берём textContent, а не .text
                     price_raw = price_elements[0].get_attribute("textContent").strip() if price_elements else ""
                     price = clean_price(price_raw)
-                    game_url = url_elements[0].get_attribute("href")
+                    game_url = a_elements[i - 1].get_attribute("href")
 
                     results.append({
                         "title": title,
@@ -103,7 +97,7 @@ class GOGParser:
                         "url": game_url,
                     })
 
-                    logging.info("✅ Parsed game: %s | Price: %s", title, price)
+                    logging.info("✅ Parsed game: %s | Price: %s | URL: %s", title, price, game_url)
                 else:
                     logging.info("⛔️ No title or URL found for product %d on page %d", i, page)
 
@@ -136,7 +130,7 @@ async def save_to_db(data: list):
         updated_count = 0
 
         for item in data:
-            price = float(item["price"])  # Предполагается, что clean_price уже всё обработал
+            price = float(item["price"])
 
             res = await session.execute(
                 select(Product).where(
