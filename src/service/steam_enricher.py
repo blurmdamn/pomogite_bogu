@@ -1,5 +1,7 @@
 import asyncio
 import logging
+import requests
+from bs4 import BeautifulSoup
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -19,7 +21,7 @@ from src.models.stores import Store
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 
-class DescriptionEnricher:
+class SteamDescriptionEnricher:
     def __init__(self, headless: bool = True):
         chrome_options = Options()
         if headless:
@@ -33,7 +35,7 @@ class DescriptionEnricher:
             options=chrome_options
         )
         self.wait = WebDriverWait(self.driver, 10)
-        logging.info("🔧 Selenium WebDriver initialized.")
+        logging.info("🟢 Selenium WebDriver initialized.")
 
     def fetch_steam_description(self, url: str) -> str | None:
         try:
@@ -42,56 +44,30 @@ class DescriptionEnricher:
             element = self.driver.find_element(By.ID, "game_area_description")
             return element.text.strip()
         except Exception as e:
-            logging.warning(f"❌ Failed to fetch Steam description: {url} | {e}")
-            return None
+            logging.warning(f"⚠️ Selenium failed for: {url} | {e}")
+            # fallback через requests
+            try:
+                headers = {
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+                }
+                response = requests.get(url, headers=headers, timeout=10)
+                if response.status_code == 200:
+                    soup = BeautifulSoup(response.text, "html.parser")
+                    desc_block = soup.find(id="game_area_description")
+                    if desc_block:
+                        return desc_block.get_text(strip=True)
+                    else:
+                        logging.warning(f"❌ No #game_area_description found via requests for {url}")
+                else:
+                    logging.warning(f"❌ Requests failed, status {response.status_code} for {url}")
+            except Exception as r_err:
+                logging.warning(f"❌ Requests fallback failed for {url} | {r_err}")
 
-    def fetch_gog_description(self, url: str) -> str | None:
-        try:
-            self.driver.get(url)
-            self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, "description")))
-            element = self.driver.find_element(By.CLASS_NAME, "description")
-            return element.text.strip()
-        except Exception as e:
-            logging.warning(f"❌ Failed to fetch GOG description: {url} | {e}")
             return None
 
     def close(self):
         self.driver.quit()
-        logging.info("🛑 Selenium WebDriver closed.")
-
-
-async def enrich_gog_products():
-    async with async_session_maker() as session:
-        gog_store = await session.scalar(select(Store).where(Store.name == "GOG"))
-        if not gog_store:
-            logging.error("❌ GOG store not found in DB.")
-            return
-
-        products = await session.scalars(
-            select(Product).where(
-                Product.store_id == gog_store.id,
-                Product.is_enriched.is_(False),
-                Product.description.is_(None),
-                Product.url.like('%/game/%')
-            )
-        )
-        products = products.all()
-
-        logging.info(f"🧠 Found {len(products)} GOG products to enrich.")
-        enricher = DescriptionEnricher(headless=True)
-
-        for product in products:
-            description = enricher.fetch_gog_description(product.url)
-            if description:
-                product.description = description
-                product.is_enriched = True
-                logging.info(f"✅ GOG enriched: {product.name}")
-            else:
-                logging.warning(f"⚠️ GOG skipped: {product.name}")
-
-        await session.commit()
-        enricher.close()
-        logging.info("🎉 GOG enrichment done.")
+        logging.info("🔴 Selenium WebDriver closed.")
 
 
 async def enrich_steam_products():
@@ -112,22 +88,21 @@ async def enrich_steam_products():
         products = products.all()
 
         logging.info(f"🧠 Found {len(products)} Steam products to enrich.")
-        enricher = DescriptionEnricher(headless=True)
+        enricher = SteamDescriptionEnricher(headless=True)
 
         for product in products:
             description = enricher.fetch_steam_description(product.url)
             if description:
                 product.description = description
                 product.is_enriched = True
-                logging.info(f"✅ Steam enriched: {product.name}")
+                logging.info(f"✅ Enriched: {product.name}")
             else:
-                logging.warning(f"⚠️ Steam skipped: {product.name}")
+                logging.warning(f"⚠️ Skipped: {product.name}")
 
         await session.commit()
         enricher.close()
-        logging.info("🎉 Steam enrichment done.")
+        logging.info("🎉 Steam enrichment complete.")
 
 
 if __name__ == "__main__":
-    asyncio.run(enrich_gog_products())
     asyncio.run(enrich_steam_products())

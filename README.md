@@ -29,3 +29,9 @@ async def test():
         await find_and_notify_cheaper_games(session)
 
 asyncio.run(test())
+
+
+
+python -m src.service.gog_enricher
+
+python -m src.service.steam_enricher

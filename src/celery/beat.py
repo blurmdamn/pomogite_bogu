@@ -13,4 +13,12 @@ celery_app.conf.beat_schedule = {
         "task": "src.tasks.compare.compare_prices_and_notify",
         "schedule": crontab(minute=0, hour=19),  # каждый день в 19:00
     },
+    "enrich-gog-daily": {
+        "task": "tasks.enrich_gog_products",  # 👈 без src. если @shared_task без пути
+        "schedule": crontab(minute=30, hour=18),
+    },
+    "enrich-steam-daily": {
+        "task": "tasks.enrich_steam_products",
+        "schedule": crontab(minute=45, hour=18),
+    },
 }
