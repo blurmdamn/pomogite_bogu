@@ -35,3 +35,5 @@ asyncio.run(test())
 python -m src.service.gog_enricher
 
 python -m src.service.steam_enricher
+
+python -m src.scripts.update_search_vector

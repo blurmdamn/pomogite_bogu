@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
+from sqlalchemy.dialects.postgresql import TSVECTOR
 from sqlalchemy import ForeignKey, Integer, String, Float, TIMESTAMP, func, Text, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.models.base_class import Base
@@ -21,6 +22,8 @@ class Product(Base):
     # 🆕 Добавленные поля
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     is_enriched: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+
+    search_vector: Mapped[Optional[str]] = mapped_column(TSVECTOR)
 
     store: Mapped["Store"] = relationship("Store", back_populates="products", lazy="joined")
     wishlists: Mapped[list["Wishlist"]] = relationship("Wishlist", secondary=wishlist_product, back_populates="products")

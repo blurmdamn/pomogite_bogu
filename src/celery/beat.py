@@ -21,4 +21,9 @@ celery_app.conf.beat_schedule = {
         "task": "tasks.enrich_steam_products",
         "schedule": crontab(minute=45, hour=18),
     },
+    "update-search-vector-daily": {
+    "task": "tasks.update_search_vector",
+    "schedule": crontab(minute=15, hour=3),  # каждый день в 03:15 ночи
+},
+
 }

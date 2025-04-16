@@ -10,6 +10,8 @@ celery_app = Celery(
 celery_app.autodiscover_tasks([
     "src.tasks.parsers",
     "src.tasks.compare",
+    "src.tasks.enrichment",
+    "src.tasks.vector",
 ])
 
 celery_app.conf.timezone = "Asia/Almaty"
