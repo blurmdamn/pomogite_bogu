@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 
@@ -27,14 +27,20 @@ async def create_product(
 
 
 @api_router.get(
-    "/search",
-    response_model=List[ShowProductWithStore],  # 👈 тут заменили ShowProduct
+    "/search/",
+    response_model=List[ShowProductWithStore],
     status_code=status.HTTP_200_OK,
-    description="Для отображения в поиске",
+    description="Комбинированный поиск по названию с использованием FTS и ILIKE",
 )
-async def search_products_route(
-    q: str, db: AsyncSession = Depends(get_async_session)
+async def search_products(
+    q: str = Query(..., min_length=1),
+    db: AsyncSession = Depends(get_async_session),
 ):
+    """
+    Использует:
+    - TS-вектор для Steam (russian) и GOG (english)
+    - ILIKE для магазинов без описаний/векторов (например, Nintendo)
+    """
     return await product_orm.search_products(query=q, async_db=db)
 
 
@@ -44,19 +50,44 @@ async def search_products_route(
     status_code=status.HTTP_200_OK,
     description="Получение информации о продукте",
 )
-async def get_product(product_id: int, db: AsyncSession = Depends(get_async_session)):
+async def get_product(
+    product_id: int,
+    db: AsyncSession = Depends(get_async_session)
+):
     return await product_orm.retrieve_product(product_id=product_id, async_db=db)
 
-from fastapi import Query
 
 @api_router.get(
-    "/search/",
-    response_model=List[ProductSearchResult],
+    "/smart_search",
+    response_model=List[ShowProductWithStore],
     status_code=status.HTTP_200_OK,
-    description="Поиск игр по названию"
+    description="Умный полнотекстовый поиск по описанию с сортировкой по релевантности"
 )
-async def search_products(
+async def smart_search_products_route(
     q: str = Query(..., min_length=1),
     db: AsyncSession = Depends(get_async_session)
 ):
-    return await product_orm.search_products(query=q, async_db=db)
+    return await product_orm.smart_search_products(query=q, async_db=db)
+
+
+@api_router.get(
+    "/list",
+    response_model=List[ShowProductWithStore],
+    status_code=status.HTTP_200_OK,
+    description="Список всех продуктов (для отображения на главной)"
+)
+async def list_all_products(db: AsyncSession = Depends(get_async_session)):
+    return await product_orm.get_all_products(async_db=db)
+
+
+@api_router.get(
+    "/by_store/{store_name}",
+    response_model=List[ShowProductWithStore],
+    status_code=status.HTTP_200_OK,
+    description="Получить продукты по магазину"
+)
+async def get_products_by_store(
+    store_name: str,
+    db: AsyncSession = Depends(get_async_session)
+):
+    return await product_orm.get_products_by_store(store_name=store_name, async_db=db)
