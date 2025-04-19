@@ -80,10 +80,15 @@ class GOGParser:
             for i in range(1, 49):
                 base_xpath = f'//*[@id="Catalog"]/div/div[2]/paginated-products-grid/div/product-tile[{i}]'
                 title_xpath = f'{base_xpath}/a/div[2]/div[1]/product-title/span'
-                price_xpath = f'{base_xpath}/a/div[2]/div[2]/div/product-price/price-value/span'
+
+                # 🔧 Обновлённый блок для поиска цены
+                price_xpath_final = f'{base_xpath}//span[contains(@class, "final-value")]'
+                price_xpath_base = f'{base_xpath}//span[contains(@class, "base-value")]'
 
                 title_elements = self.driver.find_elements(By.XPATH, title_xpath)
-                price_elements = self.driver.find_elements(By.XPATH, price_xpath)
+                price_elements = self.driver.find_elements(By.XPATH, price_xpath_final)
+                if not price_elements:
+                    price_elements = self.driver.find_elements(By.XPATH, price_xpath_base)
 
                 if title_elements and i - 1 < len(a_elements):
                     title = title_elements[0].text.strip()
