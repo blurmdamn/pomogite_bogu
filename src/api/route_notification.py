@@ -38,3 +38,15 @@ async def list_notifications(
 ):
     return await notification_orm.list_notifications_by_user(user_id=current_user.id, async_db=db)
 
+
+@api_router.post(
+    "/mark_all_as_read",
+    status_code=status.HTTP_200_OK,
+    description="Пометить все уведомления как прочитанные"
+)
+async def mark_all_as_read(
+    db: AsyncSession = Depends(get_async_session),
+    current_user=Depends(get_current_user)
+):
+    await notification_orm.mark_all_notifications_as_read(user_id=current_user.id, async_db=db)
+    return {"message": "Все уведомления помечены как прочитанные"}

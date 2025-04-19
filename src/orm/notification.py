@@ -28,3 +28,16 @@ async def list_notifications_by_user(user_id: int, async_db: AsyncSession):
     query = select(Notification).where(Notification.user_id == user_id)
     result = await async_db.execute(query)
     return result.scalars().all()
+
+
+from sqlalchemy import update
+from src.models.notifications import Notification
+
+async def mark_all_notifications_as_read(user_id: int, async_db: AsyncSession):
+    stmt = (
+        update(Notification)
+        .where(Notification.user_id == user_id, Notification.is_read == False)
+        .values(is_read=True)
+    )
+    await async_db.execute(stmt)
+    await async_db.commit()

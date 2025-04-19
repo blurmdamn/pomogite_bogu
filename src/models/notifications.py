@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING
-from sqlalchemy import ForeignKey, Integer, Text, TIMESTAMP, func
+from sqlalchemy import Boolean, ForeignKey, Integer, Text, TIMESTAMP, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.models.base_class import Base
 
@@ -14,5 +14,7 @@ class Notification(Base):
     product_id: Mapped[int] = mapped_column(ForeignKey("products.id"))
     message: Mapped[str] = mapped_column(Text, nullable=False)
     sent_at: Mapped[str] = mapped_column(TIMESTAMP(timezone=True), server_default=func.now())
+    is_read: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="false")
+
 
     user: Mapped["User"] = relationship("User", back_populates="notifications")
