@@ -64,3 +64,20 @@ async def add_product_to_wishlist(
         product_id=payload.product_id,
         async_db=db
     )
+
+
+@api_router.delete(
+    "/{product_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    description="Удалить продукт из вишлиста текущего пользователя"
+)
+async def remove_product_from_wishlist(
+    product_id: int,
+    db: AsyncSession = Depends(get_async_session),
+    current_user=Depends(get_current_user)
+):
+    await wishlist_orm.remove_product_from_user_wishlist(
+        user_id=current_user.id,
+        product_id=product_id,
+        async_db=db
+    )

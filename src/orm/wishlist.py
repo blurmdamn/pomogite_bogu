@@ -90,3 +90,25 @@ async def list_wishlists(async_db: AsyncSession):
         select(Wishlist).options(joinedload(Wishlist.products))
     )
     return result.scalars().all()
+
+
+from src.models.wishlists_products import wishlist_product
+from sqlalchemy import delete
+
+async def remove_product_from_user_wishlist(
+    user_id: int,
+    product_id: int,
+    async_db: AsyncSession
+):
+    """
+    Удалить продукт из вишлиста пользователя.
+    """
+    wishlist = await get_or_create_user_wishlist(async_db, user_id)
+
+    stmt = delete(wishlist_product).where(
+        wishlist_product.c.wishlist_id == wishlist.id,
+        wishlist_product.c.product_id == product_id
+    )
+    await async_db.execute(stmt)
+    await async_db.commit()
+    return {"message": "Product removed from wishlist"}
